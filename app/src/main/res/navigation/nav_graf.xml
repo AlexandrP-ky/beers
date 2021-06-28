@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/beer_list_fragment">
+    <fragment
+        android:id="@+id/beer_list_fragment"
+        android:name="com.example.beer.beerlist.presentation.fragment.BeerListFragment"
+        android:label="BeerList"
+        tools:layout="@layout/fragment_beer_list">
+    </fragment>
+    <fragment
+        android:id="@+id/beer_fragment"
+        android:name="com.example.beer.beer.presentation.fragment.BeerFragment"
+        android:label="Beer"
+        tools:layout="@layout/fragment_beer"/>
+
+</navigation>
