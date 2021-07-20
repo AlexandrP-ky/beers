@@ -12,19 +12,23 @@ import io.reactivex.rxjava3.core.Single;
 
 public class MainRepositoryImpl implements MainRepository {
 
-    private final BeerService service;
+    private final BeerService mService;
 
     public MainRepositoryImpl() {
-        service = NetworkModule.getInstance().getRetrofit().create(BeerService.class);
+        mService = NetworkModule.getInstance().getRetrofit().create(BeerService.class);
     }
 
     @Override
     public Single<BeerModel> getBeer(int id) {
-        return service.getBeer(id).map(this::mapToBeerModel);
+        return mService.getBeer(id).map(this::mapToBeerModel);
     }
 
     private BeerModel mapToBeerModel(List<BeerResponseModel> list) {
         BeerResponseModel responseModel = list.get(0);
-        return new BeerModel(responseModel.getName(), responseModel.getImage_url(), responseModel.getDescription());
+        return new BeerModel(
+                responseModel.getName(),
+                responseModel.getImageUrl(),
+                responseModel.getDescription()
+        );
     }
 }

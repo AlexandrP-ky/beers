@@ -26,15 +26,15 @@ public class BeerFragment extends Fragment implements BeerView {
 
     private static final String BEER_ID = "id";
 
-    private TextView title;
-    private TextView description;
-    private ImageView image;
-    private BeerPresenter presenter;
+    private TextView mTitle;
+    private TextView mDescription;
+    private ImageView mImage;
+    private BeerPresenter mPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new BeerPresenter(this);
+        mPresenter = new BeerPresenter(this);
     }
 
     @Override
@@ -46,12 +46,12 @@ public class BeerFragment extends Fragment implements BeerView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        title = view.findViewById(R.id.fragment_beer_title);
-        description = view.findViewById(R.id.fragment_beer_description);
-        image = view.findViewById(R.id.fragment_beer_image);
+        mTitle = view.findViewById(R.id.fragment_beer_title);
+        mDescription = view.findViewById(R.id.fragment_beer_description);
+        mImage = view.findViewById(R.id.fragment_beer_image);
         if (getArguments() != null) {
             int id = getArguments().getInt(BEER_ID, 0);
-            presenter.getBeer(id);
+            mPresenter.getBeer(id);
         }
     }
 
@@ -59,11 +59,11 @@ public class BeerFragment extends Fragment implements BeerView {
     public void setData(BeerModel beer) {
         ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(beer.getName());
-        title.setText(beer.getName());
-        description.setText(beer.getDescription());
+        mTitle.setText(beer.getName());
+        mDescription.setText(beer.getDescription());
         Glide.with(this)
                 .applyDefaultRequestOptions(new RequestOptions().override(600, 600))
                 .load(beer.getImageUrl())
-                .into(image);
+                .into(mImage);
     }
 }

@@ -11,21 +11,21 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class BeerPresenter {
     public BeerPresenter(BeerView beerView) {
-        this.beerView = beerView;
-        beerInteractor = new BeerInteractor();
+        this.mBeerView = beerView;
+        mBeerInteractor = new BeerInteractor();
     }
 
-    private final BeerView beerView;
-    private final BeerInteractor beerInteractor;
+    private final BeerView mBeerView;
+    private final BeerInteractor mBeerInteractor;
 
     public void getBeer(int id) {
-        beerInteractor.getBeer(id)
+        mBeerInteractor.getBeer(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DisposableSingleObserver<BeerModel>() {
                     @Override
                     public void onSuccess(@NonNull BeerModel beerModel) {
-                        beerView.setData(beerModel);
+                        mBeerView.setData(beerModel);
                     }
 
                     @Override

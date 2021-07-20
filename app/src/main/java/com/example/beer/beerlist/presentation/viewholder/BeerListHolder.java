@@ -15,22 +15,22 @@ import com.example.beer.beerlist.presentation.fragment.OnItemBeerClick;
 
 public class BeerListHolder extends RecyclerView.ViewHolder {
 
-    private TextView titleTextView;
-    private ImageView beerLabelView;
-    private Context ctx;
+    private final TextView mTitle;
+    private final ImageView mIcon;
+    private final Context mContext;
 
-    public BeerListHolder(LayoutInflater inflater, ViewGroup parent, Context ctx) {
+    public BeerListHolder(LayoutInflater inflater, ViewGroup parent, Context context) {
         super(inflater.inflate(R.layout.view_item_beerlist, parent, false));
-        titleTextView = itemView.findViewById(R.id.beer_title);
-        beerLabelView = itemView.findViewById(R.id.beer_list_imageView);
-        this.ctx = ctx;
+        mTitle = itemView.findViewById(R.id.beer_title);
+        mIcon = itemView.findViewById(R.id.beer_list_imageView);
+        this.mContext = context;
     }
 
     public void bind(BeerListModel beer, OnItemBeerClick onItemBeerClick) {
         itemView.setOnClickListener(v -> onItemBeerClick.onItemClick(beer));
-        titleTextView.setText(beer.getName());
-        Glide.with(ctx)
+        mTitle.setText(beer.getName());
+        Glide.with(mContext)
                 .load(beer.getImageUrl())
-                .into(beerLabelView);
+                .into(mIcon);
     }
 }

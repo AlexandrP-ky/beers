@@ -10,24 +10,26 @@ import com.example.beer.beerlist.domain.model.BeerListModel;
 import com.example.beer.beerlist.presentation.fragment.OnItemBeerClick;
 import com.example.beer.beerlist.presentation.viewholder.BeerListHolder;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 public class BeerListAdapter extends RecyclerView.Adapter<BeerListHolder> {
 
     private final List<BeerListModel> mBeers;
-    private final Context context;
-    private OnItemBeerClick mOnClickListener;
+    private final Context mContext;
+    private final OnItemBeerClick mOnClickListener;
 
     public BeerListAdapter(List<BeerListModel> beers, Context context, OnItemBeerClick onClickListener) {
         mBeers = beers;
         mOnClickListener = onClickListener;
-        this.context = context;
+        mContext = context;
     }
 
     @Override
-    public BeerListHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(context);
-        return new BeerListHolder(layoutInflater, parent, context);
+    public BeerListHolder onCreateViewHolder(@NotNull ViewGroup parent, int viewType) {
+        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        return new BeerListHolder(layoutInflater, parent, mContext);
     }
 
     @Override

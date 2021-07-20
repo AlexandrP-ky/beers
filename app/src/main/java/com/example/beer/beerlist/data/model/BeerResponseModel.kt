@@ -1,5 +1,6 @@
 package com.example.beer.beerlist.data.model
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class BeerResponseModel(
@@ -7,8 +8,9 @@ data class BeerResponseModel(
         val id: Int,
         @SerializedName("name")
         val name: String?,
+        @Expose
         @SerializedName("image_url")
-        val image_url: String?,
+        val imageUrl: String?,
         @SerializedName("description")
         val description: String?
 )

@@ -14,14 +14,14 @@ import io.reactivex.rxjava3.core.Single;
 public class MainRepositoryImpl implements MainRepository {
 
     public MainRepositoryImpl() {
-        service = NetworkModule.getInstance().getRetrofit().create(BeerListService.class);
+        mService = NetworkModule.getInstance().getRetrofit().create(BeerListService.class);
     }
 
-    private final BeerListService service;
+    private final BeerListService mService;
 
     @Override
     public Single<List<BeerListModel>> getBeerList() {
-        return service.getBeers()
+        return mService.getBeers()
                 .map(this::mapToListBeerModel);
     }
 
@@ -34,6 +34,6 @@ public class MainRepositoryImpl implements MainRepository {
     }
 
     private BeerListModel mapToBeerModel(BeerResponseModel model) {
-        return new BeerListModel(model.getId(), model.getName(), model.getImage_url());
+        return new BeerListModel(model.getId(), model.getName(), model.getImageUrl());
     }
 }

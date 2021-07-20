@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -25,14 +26,13 @@ import java.util.List;
 public class BeerListFragment extends Fragment implements BeerListView {
     private static final String BEER_ID = "id";
 
-    private RecyclerView BeerRecyclerView;
-    private BeerListAdapter Adapter;
-    private BeerListPresenter presenter;
+    private RecyclerView mRecyclerView;
+    private BeerListPresenter mPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new BeerListPresenter(this);
+        mPresenter = new BeerListPresenter(this);
     }
 
     @Override
@@ -45,21 +45,21 @@ public class BeerListFragment extends Fragment implements BeerListView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        BeerRecyclerView = view.findViewById(R.id.beer_recycler_view);
-        BeerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        presenter.getBeerList();
+        mRecyclerView = view.findViewById(R.id.beer_recycler_view);
+        mRecyclerView.setLayoutManager((new GridLayoutManager(getContext(), 2)));
+        mPresenter.getBeerList();
         ((MainActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(getString(R.string.beer_list_lable));
     }
 
     @Override
     public void setData(List<BeerListModel> beers) {
-        Adapter = new BeerListAdapter(beers, getContext(), beer -> {
+        BeerListAdapter adapter = new BeerListAdapter(beers, getContext(), beer -> {
             Bundle arg = new Bundle();
             arg.putInt(BEER_ID, beer.getId());
             navigateToBeerScreen(arg);
         });
-        BeerRecyclerView.setAdapter(Adapter);
+        mRecyclerView.setAdapter(adapter);
     }
 
     private void navigateToBeerScreen(Bundle arg) {

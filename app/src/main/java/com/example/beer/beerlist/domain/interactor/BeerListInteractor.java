@@ -10,12 +10,12 @@ import io.reactivex.rxjava3.core.Single;
 
 public class BeerListInteractor {
     public BeerListInteractor() {
-        repository = new MainRepositoryImpl();
+        mRepository = new MainRepositoryImpl();
     }
 
-    private final MainRepository repository;
+    private final MainRepository mRepository;
 
     public Single<List<BeerListModel>> getBeerList() {
-       return repository.getBeerList();
+        return mRepository.getBeerList();
     }
 }
